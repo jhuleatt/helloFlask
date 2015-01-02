@@ -3,13 +3,14 @@ import RPi.GPIO as GPIO
 import datetime
 app = Flask(__name__)
 
-lightOn = False
-
 @app.route("/")
 def hello():
-    if lightOn == True:
-        lightOn = False
-    else:
+    try:
+        if lightOn == True:
+            lightOn = False
+        else:
+            lightOn = True
+    except UnboundLocalError:
         lightOn = True
 
     GPIO.setmode(GPIO.BOARD)
